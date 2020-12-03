@@ -17,7 +17,6 @@ class ShopProduct extends React.Component {
     }
 
     setData(respone){
-        console.log(respone)
         switch(respone.status){
             case 200:{
                 this.setState({data:respone.data},console.log());
@@ -43,8 +42,8 @@ class ShopProduct extends React.Component {
                             </div>
                             <ShopItemFilter></ShopItemFilter>
                             <div className="row">
-                                {this.state.data.map(()=>{
-                                    return (<ShopProductItem></ShopProductItem>);
+                                {this.state.data.map((item, index)=>{
+                                    return (<ShopProductItem item={item} key={index}></ShopProductItem>);
                                 })}
                             </div>
                         </div>
