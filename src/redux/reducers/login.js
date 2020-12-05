@@ -1,7 +1,7 @@
 import { LOGGED } from '../actions/login/action_types';
 
 export default (state = {
-    login: true,
+    login: false,
 }, action) => {
     switch (action.type) {
         case LOGGED:

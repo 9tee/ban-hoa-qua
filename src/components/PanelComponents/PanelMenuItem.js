@@ -5,7 +5,7 @@ class PanelMenuItem extends React.Component{
     render(){
         return(
             <li>
-                <Link to={this.props.href}>{this.props.value}</Link>
+                <a href={this.props.href}>{this.props.value}</a>
             </li>
         );
     }

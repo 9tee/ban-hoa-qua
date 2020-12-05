@@ -41,7 +41,7 @@ class ShopItemFilter extends React.Component {
                     </div>
                     <div className="col-lg-4 col-md-4">
                         <div className="filter__found">
-                            <h6><span>16</span> Products found</h6>
+                            <h6><span>{this.props.total}</span> Products found</h6>
                         </div>
                     </div>
                 </div>

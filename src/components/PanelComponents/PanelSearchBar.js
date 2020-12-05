@@ -1,9 +1,12 @@
 import React from 'react';
 import Contact from './Contact';
+
+const data = ['Tất cả'];
+
 class PanelSearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { style: { opacity: 0, height: '0px', padding: '0px', overflow: 'hidden' }, categories: 'All Categories' };
+        this.state = { style: { opacity: 0, height: '0px', padding: '0px', overflow: 'hidden' }, categories: 'Tất cả' };
     }
     toggle() {
         if (this.state.style.opacity !== 0) {
@@ -28,14 +31,12 @@ class PanelSearchBar extends React.Component {
                                 <span className="arrow_carrot-down"></span>
                             </div>
                             <input type="text" placeholder="What do you need ?"></input>
-                            <button type="submit" className="site-btn">SEARCH</button>
+                            <button type="submit" className="site-btn">Tìm kiếm</button>
                         </form>
                     </div>
                     <div className="newul">
                         <ul style={{ ...{ transition: 'opacity ease-in-out 1s 0s' , zIndex:1}, ...this.state.style }}>
-                            <li><a onClick={(event) => { this.changeCategories(event) }}>All Categories</a></li>
-                            <li><a onClick={(event) => { this.changeCategories(event) }}>Fresh Meat</a></li>
-                            <li><a onClick={(event) => { this.changeCategories(event) }}>Vegetables</a></li>
+                            {data.map((item) => { return (<li><a onClick={(event) => { this.changeCategories(event) }}>{item}</a></li>)})}
                         </ul>
                     </div>
                     <Contact number="0978004683"></Contact>

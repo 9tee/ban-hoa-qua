@@ -11,7 +11,7 @@ class ShopProductItem extends React.Component {
         return (
             <div className="col-lg-4 col-md-6 col-sm-6">
                 <div className="product__item">
-                    <div className="product__item__pic" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/img/product/product-1.jpg'})`}}>
+                    <div className="product__item__pic" style={{ backgroundImage: `url(${process.env.PUBLIC_URL + '/'+ this.props.item.anh})`, backgroundSize: 'cover'}}>
                         <ul className="product__item__pic__hover">
                             <li><Link to="#"><FontAwesomeIcon icon={faHeart} color="black" /></Link></li>
                             <li><Link to="#"><FontAwesomeIcon icon={faRetweet} color="black" /></Link></li>

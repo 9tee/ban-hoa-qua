@@ -14,10 +14,10 @@ class CartMain extends React.Component {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th className="shoping__product">Products</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
-                                            <th>Total</th>
+                                            <th className="shoping__product">Sản phẩm</th>
+                                            <th>Giá</th>
+                                            <th>Số lượng</th>
+                                            <th>Thành tiền</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -34,28 +34,24 @@ class CartMain extends React.Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="shoping__cart__btns">
-                                <a href="#" className="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                                <a href="#" className="primary-btn cart-btn">TIẾP TỤC MUA HÀNG</a>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="shoping__continue">
                                 <div className="shoping__discount">
-                                    <h5>Discount Codes</h5>
-                                    <form action="#">
-                                        <input type="text" placeholder="Enter your coupon code" />
-                                        <button type="submit" className="site-btn">APPLY COUPON</button>
-                                    </form>
+
                                 </div>
                             </div>
                         </div>
                         <div className="col-lg-6">
                             <div className="shoping__checkout">
-                                <h5>Cart Total</h5>
+                                <h5>Tổng giỏ hàng</h5>
                                 <ul>
-                                    <li>Subtotal <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
-                                    <li>Total <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
+                                    <li>Tổng tiền <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
+                                    <li>Thành tiền <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
                                 </ul>
-                                <a href="#" className="primary-btn">PROCEED TO CHECKOUT</a>
+                                <a href="#" className="primary-btn">THANH TIỀN</a>
                             </div>
                         </div>
                     </div>

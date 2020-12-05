@@ -5,41 +5,59 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 
+import { Form, Button, Input } from 'antd';
+import { FormInstance } from 'antd/lib/form';
+
 import { withRouter } from "react-router-dom";
 import axios from 'axios'
-import {BASE_URL} from '../../consts';
+import { BASE_URL } from '../../consts';
+
+const { TextArea } = Input;
 
 const data = [
-     "./img/product/details/thumb-1.jpg",
-     "./img/product/details/thumb-2.jpg",
-     "./img/product/details/thumb-3.jpg",
-     "./img/product/details/thumb-4.jpg",
-     "./img/product/details/thumb-1.jpg",
-     "./img/product/details/thumb-2.jpg",
-     "./img/product/details/thumb-3.jpg",
-     "./img/product/details/thumb-4.jpg",
+    "./img/product/details/thumb-1.jpg",
+    "./img/product/details/thumb-2.jpg",
+    "./img/product/details/thumb-3.jpg",
+    "./img/product/details/thumb-4.jpg",
+    "./img/product/details/thumb-1.jpg",
+    "./img/product/details/thumb-2.jpg",
+    "./img/product/details/thumb-3.jpg",
+    "./img/product/details/thumb-4.jpg",
 ];
 
 class ShopDetailMain extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {img:`${window.location.protocol}//${window.location.host}/img/product/details/product-details-1.jpg`, qty:1};
+        this.state = { img: 'https://via.placeholder.com/150', qty: 1 };
         this.state.item = {};
-    }
-
-    componentDidMount(){
-        console.log(process.env)
-        axios.get(`${BASE_URL}/foods/${this.props.match.params.id}`).then((respone) => {this.setState({item:respone.data}); console.log(respone)}).catch(console.log)
+        this.state.comments = []
+        this.formRef = React.createRef();
     }
 
 
-    add(){
-        this.setState({qty: this.state.qty +1})
+
+    componentDidMount() {
+        axios.get(`${BASE_URL}/foods/${this.props.match.params.id}`).then((respone) => { this.setState({ item: respone.data, img: `${window.location.protocol}//${window.location.host}/${respone.data.anh}`}) }).catch(console.log)
+        axios.get(`${BASE_URL}/comments?mamon=${this.props.match.params.id}`).then((respone) => { this.setState({ comments: respone.data }); console.log(respone) }).catch(console.log)
     }
 
-    dec(){
-        if(this.state.qty > 1){
-        this.setState({qty: this.state.qty -1})
+    onFinish = values => {
+        console.log('Success:', values);
+        this.formRef.current.resetFields()
+    };
+
+    onFinishFailed = errorInfo => {
+        console.log('Failed:', errorInfo);
+    };
+
+
+    add() {
+        this.setState({ qty: this.state.qty + 1 })
+    }
+
+    dec() {
+        if (this.state.qty > 1) {
+            this.setState({ qty: this.state.qty - 1 })
         }
     }
 
@@ -77,30 +95,24 @@ class ShopDetailMain extends React.Component {
                                 <div className="product__details__text">
                                     <h3>{this.state.item.tenmon}</h3>
                                     <div className="product__details__rating">
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star"></i>
-                                        <i className="fa fa-star-half-o"></i>
-                                        <span>(18 reviews)</span>
+                                        <span>({this.state.comments.length} nhận xét)</span>
                                     </div>
                                     <div className="product__details__price">{this.state.item.gia}đ</div>
                                     <p>{this.state.item.mota}</p>
                                     <div className="product__details__quantity">
                                         <div className="quantity">
                                             <div className="pro-qty">
-                                                <span className="qtybtn" onClick={()=>{this.dec()}}>-</span>
+                                                <span className="qtybtn" onClick={() => { this.dec() }}>-</span>
                                                 <input type="text" value={this.state.qty} />
-                                                <span className="qtybtn" onClick={()=>{this.add()}}>+</span>
+                                                <span className="qtybtn" onClick={() => { this.add() }}>+</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <a href="#" className="primary-btn">ADD TO CARD</a>
+                                    <button className="primary-btn" style={{border: 'none'}}>Thêm vào giỏ hàng</button>
                                     <a href="#" className="heart-icon"><span className="icon_heart_alt"></span></a>
                                     <ul>
-                                        <li><b>Tình trạng</b> <span>In Stock</span></li>
-                                        <li><b>Đơn vị tính</b> <span>{this.state.item.dvt}<samp>Free pickup today</samp></span></li>
-                                        <li><b>Weight</b> <span>0.5 kg</span></li>
+                                        <li><b>Tình trạng</b> <span>{this.state.item.trangthai}</span></li>
+                                        <li><b>Đơn vị tính</b> <span>{this.state.item.dvt}</span></li>
                                     </ul>
                                 </div>
                             </div>
@@ -108,11 +120,53 @@ class ShopDetailMain extends React.Component {
                                 <div className="product__details__tab" >
                                     <ul className="nav nav-tabs">
                                         <li className="nav-item active">
-                                                Reviews
+                                            Reviews
                                         </li>
                                     </ul>
+                                    <Form
+                                        name="basic"
+                                        onFinish={this.onFinish}
+                                        ref={this.formRef}
+                                    >
+                                        <Form.Item
+                                            name="comment"
+                                        >
+                                            <TextArea
+                                                placeholder="Nhận xét tại đây"
+                                                autoSize={{ minRows: 3, maxRows: 5 }}
+                                            />
+                                        </Form.Item>
+                                        <Form.Item
+                                            style={{ float: 'right' }}
+                                        >
+                                            <Button htmlType="submit">Nhận xét</Button>
+                                        </Form.Item>
+                                    </Form>
                                     <div className="tab-content">
-                                        {review()}
+                                        <div className="product__details__tab__desc">
+                                            <div className="container">
+                                                {
+                                                    this.state.comments.map((item) => {
+                                                        return (
+                                                            <div class="row" style={{margin:'10px auto 0px auto', borderBottom: '1px solid #dee2e6', width:'100%' }}>
+                                                                <div className="media">
+                                                                    <div className="media-left">
+                                                                        <img src="http://fakeimg.pl/50x50" class="media-object" style={{ width: '40px' }} />
+                                                                    </div>
+                                                                    <div className="media-body" style={{ marginLeft: '20px' }}>
+                                                                        <h4 className="media-heading title">{item.ten}</h4>
+                                                                        <p className="komen">
+                                                                            {item.noidung}<br />
+                                                                        </p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })
+                                                }
+
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -125,22 +179,3 @@ class ShopDetailMain extends React.Component {
 }
 
 export default withRouter(ShopDetailMain)
-
-function review() {
-    return (
-        <div className="product__details__tab__desc">
-            <h6>Review</h6>
-            <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
-            Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
-            Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
-            sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
-            eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
-            Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
-            sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
-            diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
-            Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
-    Proin eget tortor risus.</p>
-        </div>
-    );
-}

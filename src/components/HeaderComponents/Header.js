@@ -12,7 +12,7 @@ class Header extends React.Component {
                 <div className="row">
                     <HeaderLogo></HeaderLogo>
                     <NaviBar></NaviBar>
-                    <HeaderCart bag="3" heart="4" price="15000" login={this.props.login}></HeaderCart>
+                    <HeaderCart login={this.props.login}></HeaderCart>
                 </div>
             </div>
         );

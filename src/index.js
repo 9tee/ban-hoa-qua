@@ -14,6 +14,7 @@ import { Provider } from 'react-redux'
 import { createStore, compose } from 'redux';
 import allReducers from './redux/reducers/index';
 
+import 'antd/dist/antd.css';
 import "./css/style.css";
 import "./css/elegant-icons.css";
 import "./css/new.css";
@@ -38,7 +39,8 @@ ReactDOM.render(
     <Router>
       <Header></Header>
       <Route path="/" exact component={Home} />
-      <Route path="/shop" component={Shop} />
+      <Route exact path="/shop" component={Shop} />
+      <Route path="/shop/:id" component={Shop} />
       <Route path="/login" component={Login} />
       <Route path="/shop-detail/:id" component={ShopDetail} />
       <Route path="/cart" component = {Cart}/>

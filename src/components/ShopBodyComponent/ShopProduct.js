@@ -1,11 +1,16 @@
 import React from 'react';
 import ShopSideBar from "./ShopSideBar"
-import SlideSaleOff from "./SlideSaleOff"
 import axios from 'axios'
 import {BASE_URL} from '../../consts';
 
-import ShopItemFilter from "./ShopItemFilter"
-import ShopProductItem from "./ShopProductItem"
+
+
+import ShopItemFilter from "./ShopItemFilter";
+import ShopProductItem from "./ShopProductItem";
+
+
+
+import {withRouter} from 'react-router-dom';
 
 class ShopProduct extends React.Component {
     constructor(props){
@@ -13,7 +18,12 @@ class ShopProduct extends React.Component {
         this.state = {data: []};
     }
     componentDidMount(){
-        axios.get(BASE_URL + '/foods').then((respone) => this.setData(respone)).catch(console.log)
+        if (!this.props.match.params.id){
+        axios.get(`${BASE_URL}/foods`).then((respone) => this.setData(respone)).catch(console.log)
+        }
+        else{
+            axios.get(`${BASE_URL}/foods?idtype=${this.props.match.params.id}`).then((respone) => this.setData(respone)).catch(console.log)
+        }
     }
 
     setData(respone){
@@ -38,9 +48,9 @@ class ShopProduct extends React.Component {
                         </div>
                         <div className="col-lg-9 col-md-7">
                             <div className="section-title product__discount__title">
-                                <h2>Shop</h2>
+                                <h2>Cửa hàng</h2>
                             </div>
-                            <ShopItemFilter></ShopItemFilter>
+                            <ShopItemFilter total={this.state.data.length}></ShopItemFilter>
                             <div className="row">
                                 {this.state.data.map((item, index)=>{
                                     return (<ShopProductItem item={item} key={index}></ShopProductItem>);
@@ -54,4 +64,4 @@ class ShopProduct extends React.Component {
     }
 }
 
-export default ShopProduct;
+export default withRouter(ShopProduct);
