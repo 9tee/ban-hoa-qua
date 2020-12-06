@@ -8,9 +8,9 @@ class Cart extends React.Component {
         return(
             <>
                 <ShopMenu></ShopMenu>
-                <ShopBanner bannertext="Shopping Cart" links={<>
-                <a href="/">Home</a>
-                </>} text="Shopping Cart"></ShopBanner>
+                <ShopBanner bannertext="Giỏ hàng" links={<>
+                <a href="/">Trang chủ</a>
+                </>} text="Giỏ hàng"></ShopBanner>
                 <CartMain></CartMain>
             </>
         );

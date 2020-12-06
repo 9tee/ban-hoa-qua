@@ -2,8 +2,21 @@ import React from 'react';
 import CartItem from './CartItem';
 import { connect } from 'react-redux';
 
+import axios from 'axios';
+import {BASE_URL} from '../../consts'
+
 
 class CartMain extends React.Component {
+    constructor(props){
+        super(props);
+    }
+
+    componentDidMount(){
+        axios.get(`${BASE_URL}/order`)
+    }
+
+
+
     render() {
         return (
             <section className="shoping-cart spad">
@@ -34,7 +47,7 @@ class CartMain extends React.Component {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="shoping__cart__btns">
-                                <a href="#" className="primary-btn cart-btn">TIẾP TỤC MUA HÀNG</a>
+                                <a href="/shop" className="primary-btn cart-btn">TIẾP TỤC MUA HÀNG</a>
                             </div>
                         </div>
                         <div className="col-lg-6">

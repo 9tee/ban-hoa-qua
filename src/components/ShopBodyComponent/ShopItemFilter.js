@@ -30,7 +30,7 @@ class ShopItemFilter extends React.Component {
                 <div className="row">
                     <div className="col-lg-4 col-md-5">
                         <div className="filter__sort">
-                            <span>Sort By</span>
+                            <span>Sắp xếp</span>
                             <div className={this.state.className} onClick={()=>{this.openSelector()}} tabIndex="0"><span className="current">{this.state.sort}</span>
                                 <ul className="list">
                                     {this.state.numbers.map((number,index) => 

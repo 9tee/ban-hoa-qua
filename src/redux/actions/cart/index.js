@@ -1,4 +1,4 @@
-import {CHANGE, REMOVE} from './action_types';
+import {CHANGE, REMOVE, ADD_CART} from './action_types';
 
 export default {
     change: (data) => ({
@@ -7,6 +7,10 @@ export default {
     }),
     remove:(data) => ({
         type :REMOVE,
+        data,
+    }),
+    addCart: (data) => ({
+        type: ADD_CART,
         data,
     })
 };

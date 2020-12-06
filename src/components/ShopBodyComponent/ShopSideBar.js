@@ -31,7 +31,7 @@ class ShopSideBar extends React.Component {
         return (
             <div className="sidebar">
                 <div className="sidebar__item">
-                    <h4>Department</h4>
+                    <h4>Danh Mục</h4>
                     <ShopSideBarList items={this.state.data}></ShopSideBarList>
                 </div>
             </div>

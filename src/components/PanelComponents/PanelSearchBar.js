@@ -30,7 +30,7 @@ class PanelSearchBar extends React.Component {
                                 {this.state.categories}
                                 <span className="arrow_carrot-down"></span>
                             </div>
-                            <input type="text" placeholder="What do you need ?"></input>
+                            <input type="text" placeholder="Tìm kiếm sản phẩm ?"></input>
                             <button type="submit" className="site-btn">Tìm kiếm</button>
                         </form>
                     </div>

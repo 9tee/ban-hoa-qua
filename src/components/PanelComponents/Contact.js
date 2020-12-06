@@ -11,7 +11,7 @@ class Contact extends React.Component{
                 </div>
                 <div className="hero__search__phone__text">
                     <h5>{this.props.number}</h5>
-                    <span>support 24/7 time</span>
+                    <span>Hỗ trợ 24/7</span>
                 </div>
             </div>
         );

@@ -61,17 +61,11 @@ class ShopDetailMain extends React.Component {
         }
     }
 
-    render() {
-        const settings = {
-            dots: false,
-            arrows: false,
-            autoplay: true,
-            infinite: true,
-            autoplaySpeed: 1000,
-            slidesToShow: 4,
-            slidesToScroll: 1
-        };
+    addCart(){
+        window.dispatch({type:'ADD_CART',data:{mamon:this.props.match.params.id,tenmon:this.state.item.tenmon, dongia: this.state.item.gia,anh:this.state.img, soluong:this.state.qty}})
+    }
 
+    render() {
         return (
             <Router>
                 <div className="product-details spad">
@@ -83,12 +77,6 @@ class ShopDetailMain extends React.Component {
                                         <img className="product__details__pic__item--large"
                                             src={this.state.img} alt="" />
                                     </div>
-                                    <Slider {...settings}>
-                                        {data.map((item, index) => {
-                                            return <img className="detail-slider" src={item} onClick={() => { this.setState({ img: data[index] }) }} alt="" />
-                                        })}
-
-                                    </Slider>
                                 </div>
                             </div>
                             <div className="col-lg-6 col-md-6">
@@ -108,7 +96,7 @@ class ShopDetailMain extends React.Component {
                                             </div>
                                         </div>
                                     </div>
-                                    <button className="primary-btn" style={{border: 'none'}}>Thêm vào giỏ hàng</button>
+                                    <button className="primary-btn" style={{border: 'none'}} onClick={()=>{this.addCart()}}>Thêm vào giỏ hàng</button>
                                     <a href="#" className="heart-icon"><span className="icon_heart_alt"></span></a>
                                     <ul>
                                         <li><b>Tình trạng</b> <span>{this.state.item.trangthai}</span></li>

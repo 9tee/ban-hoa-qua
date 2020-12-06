@@ -16,40 +16,40 @@ class Footer extends React.Component {
                                     <Link to="./index.html"><img src="img/logo.png" alt=""></img></Link>
                                 </div>
                                 <ul>
-                                    <li>Address: 60-49 Road 11378 New York</li>
-                                    <li>Phone: +65 11.188.888</li>
+                                    <li>Địa chỉ: 138 Trần Bình</li>
+                                    <li>SĐT: +65 11.188.888</li>
                                     <li>Email: hello@colorlib.com</li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                             <div className="footer__widget">
-                                <h6>Useful Links</h6>
+                                <h6>Một số thông tin</h6>
                                 <ul>
-                                    <li><a href="#">About Us</a></li>
-                                    <li><a href="#">About Our Shop</a></li>
-                                    <li><a href="#">Secure Shopping</a></li>
-                                    <li><a href="#">Delivery infomation</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Our Sitemap</a></li>
+                                    <li><a href="#">Về chúng tôi</a></li>
+                                    <li><a href="#">Về shop chúng tôi</a></li>
+                                    <li><a href="#">Mua bán an toàn</a></li>
+                                    <li><a href="#">Thông tin giao hàng</a></li>
+                                    <li><a href="#">Điều khoản sử dụng</a></li>
+                                    <li><a href="#">Tìm kiếm shop</a></li>
                                 </ul>
                                 <ul>
-                                    <li><a href="#">Who We Are</a></li>
-                                    <li><a href="#">Our Services</a></li>
-                                    <li><a href="#">Projects</a></li>
-                                    <li><a href="#">Contact</a></li>
-                                    <li><a href="#">Innovation</a></li>
-                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">Chúng tôi là ai</a></li>
+                                    <li><a href="#">Dịch vụ của chúng tôi</a></li>
+                                    <li><a href="#">Dự án</a></li>
+                                    <li><a href="#">Liên lạc</a></li>
+                                    <li><a href="#">Có gì mới</a></li>
+                                    <li><a href="#">Giấy phép kinh doanh</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div className="col-lg-4 col-md-12">
                             <div className="footer__widget">
-                                <h6>Join Our Newsletter Now</h6>
-                                <p>Get E-mail updates about our latest shop and special offers.</p>
+                                <h6>Tham gia với chúng tôi ngay</h6>
+                                <p>Đăng kí nhận thông tin về chúng tôi và shop qua email</p>
                                 <form action="#">
-                                    <input type="text" placeholder="Enter your mail"></input>
-                                    <button type="submit" className="site-btn">Subscribe</button>
+                                    <input type="text" placeholder="Điền email bạn vào đây"></input>
+                                    <button type="submit" className="site-btn">Đăng kí</button>
                                 </form>
                                 <div className="footer__widget__social">
                                     <a href="#"> <FontAwesomeIcon icon={faFacebook} color="black"/></a>
