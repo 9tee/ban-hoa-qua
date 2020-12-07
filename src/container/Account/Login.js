@@ -12,7 +12,7 @@ class Login extends React.Component {
         axios.post(`${BASE_URL}/api/auth/signin`, values)
             .then(
                 (respone) => {
-                    window.localStorage.setItem('token',`${respone.tokenType} ${respone.accessToken}`)
+                    window.localStorage.setItem('token',`${respone.data.tokenType} ${respone.data.accessToken}`)
                     window.dispatch({type: 'LOGGED', data: true});
                     this.props.history.push("/");
                 }

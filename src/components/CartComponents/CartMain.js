@@ -16,8 +16,7 @@ class CartMain extends React.Component {
         axios.get(`${BASE_URL}/order`)
     }
 
-
-
+    
     render() {
         return (
             <section className="shoping-cart spad">

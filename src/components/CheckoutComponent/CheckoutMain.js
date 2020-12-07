@@ -2,6 +2,7 @@ import React from 'react';
 import { Form, Button, Input } from 'antd';
 import { connect } from 'react-redux'
 import axios from 'axios';
+import {withRouter} from 'react-router-dom';
 
 import {BASE_URL} from '../../consts';
 
@@ -11,8 +12,21 @@ class CheckoutMain extends React.Component {
     }
 
     onFinish = (values) => {
+        if(this.props.logged){
         let data = { ...values, doan: this.props.cart }
-        axios.post(`${BASE_URL}/orders`,data).then(console.log).catch(console.log);
+        let header = { headers : { 'Authorization': window.localStorage.getItem('token')}}
+        console.log(header);
+        axios.post(`${BASE_URL}/orders`,data,header).then(
+            () => {
+                window.localStorage.removeItem('cart');
+                this.props.history.push('/');
+            }
+        ).catch(
+            () => {alert("Đặt hàng thất bại");}
+        );
+        }else{
+            this.props.history.push('/login');
+        }
     }
 
     render() {
@@ -111,8 +125,9 @@ class CheckoutMain extends React.Component {
 const mapStateToProps = (state) => {
     return {
         cart: state.cart.cart,
+        logged: state.login.login,
     }
 }
 
 
-export default connect(mapStateToProps)(CheckoutMain);
+export default connect(mapStateToProps)(withRouter(CheckoutMain));

@@ -6,6 +6,13 @@ import { connect } from 'react-redux';
 
 
 class Header extends React.Component {
+    componentDidMount(){
+        let token = window.localStorage.getItem('token');
+        if(!!token){
+            window.dispatch({type:'LOGGED', data:true});
+        }
+    }
+
     render() {
         return (
             <div className="container">

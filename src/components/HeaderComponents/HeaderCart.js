@@ -14,6 +14,12 @@ class HeaderCart extends React.Component {
                     <>
                         <div className="header__cart">
                             <Shopbag />
+                            <div className="header__cart__price">
+                                <a className="login" onClick={()=> {
+                                    window.dispatch({type: 'LOGGED', data: false});
+                                    window.localStorage.removeItem('token');
+                                }}> Đăng xuất</a>
+                            </div>
                         </div>
                     </>
                     :
@@ -25,14 +31,14 @@ class HeaderCart extends React.Component {
 }
 
 function Shopbag() {
-    return(
-    <ul>
-        <li>
-            <Link to='/cart'>
-                <FontAwesomeIcon icon={faShoppingBag} color="black" />
-            </Link>
-        </li>
-    </ul>
+    return (
+        <ul>
+            <li>
+                <Link to='/cart'>
+                    <FontAwesomeIcon icon={faShoppingBag} color="black" />
+                </Link>
+            </li>
+        </ul>
     );
 }
 
