@@ -1,12 +1,18 @@
 import React from 'react';
 import Contact from './Contact';
 
+import {withRouter} from 'react-router-dom';
+
 const data = ['Tất cả'];
 
 class PanelSearchBar extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { style: { opacity: 0, height: '0px', padding: '0px', overflow: 'hidden' }, categories: 'Tất cả' };
+        this.state = { 
+            style: { opacity: 0, height: '0px', padding: '0px', overflow: 'hidden' }, 
+            categories: 'Tất cả',
+            inputValue: ''
+        };
     }
     toggle() {
         if (this.state.style.opacity !== 0) {
@@ -16,6 +22,12 @@ class PanelSearchBar extends React.Component {
             this.setState({ style: { opacity: 1 } });
         }
     }
+
+    updateInputValue(evt) {
+        this.setState({
+          inputValue: evt.target.value
+        });
+      }
 
     changeCategories(event) {
         this.setState({ style: { opacity: 0, height: '0px', padding: '0px', overflow: 'hidden' }, categories: event.target.innerText });
@@ -30,8 +42,8 @@ class PanelSearchBar extends React.Component {
                                 {this.state.categories}
                                 <span className="arrow_carrot-down"></span>
                             </div>
-                            <input type="text" placeholder="Tìm kiếm sản phẩm ?"></input>
-                            <button type="submit" className="site-btn">Tìm kiếm</button>
+                            <input type="text" placeholder="Tìm kiếm sản phẩm ?" value={this.state.inputValue} onChange={evt => this.updateInputValue(evt)} ></input>
+                            <button className="site-btn" onClick={() => {this.props.history.push(`/search/${this.state.inputValue}`)}}>Tìm kiếm</button>
                         </form>
                     </div>
                     <div className="newul">
@@ -46,4 +58,4 @@ class PanelSearchBar extends React.Component {
     }
 }
 
-export default PanelSearchBar;
+export default withRouter(PanelSearchBar);

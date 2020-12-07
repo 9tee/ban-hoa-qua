@@ -1,9 +1,10 @@
 import React from 'react';
 import CartItem from './CartItem';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import axios from 'axios';
-import {BASE_URL} from '../../consts'
+import {BASE_URL, IMAGE_URL} from '../../consts'
 
 
 class CartMain extends React.Component {
@@ -37,7 +38,7 @@ class CartMain extends React.Component {
                                     <tbody>
                                         {this.props.cart.map((item,index) =>{
                                                 return  <CartItem name={item.tenmon} index={index} price={item.dongia} quantity={item.soluong}
-                                                img={process.env.PUBLIC_URL + '/img/cart/cart-1.jpg'}></CartItem>
+                                                img={`${IMAGE_URL}/${item.anh}`}></CartItem>
                                         })}
                                     </tbody>
                                 </table>
@@ -64,7 +65,7 @@ class CartMain extends React.Component {
                                     <li>Tổng tiền <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
                                     <li>Thành tiền <span>${this.props.cart.reduce((sum,item) => {return sum + item.soluong*item.dongia},0)}</span></li>
                                 </ul>
-                                <a href="#" className="primary-btn">THANH TIỀN</a>
+                                <Link to="/check-out" className="primary-btn">THANH TOÁN</Link>
                             </div>
                         </div>
                     </div>

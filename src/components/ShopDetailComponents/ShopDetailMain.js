@@ -1,16 +1,13 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import Slider from "react-slick";
-
 import { Form, Button, Input } from 'antd';
-import { FormInstance } from 'antd/lib/form';
 
 import { withRouter } from "react-router-dom";
 import axios from 'axios'
-import { BASE_URL } from '../../consts';
+import { BASE_URL, IMAGE_URL } from '../../consts';
 
 const { TextArea } = Input;
 
@@ -37,7 +34,7 @@ class ShopDetailMain extends React.Component {
 
 
     componentDidMount() {
-        axios.get(`${BASE_URL}/foods/${this.props.match.params.id}`).then((respone) => { this.setState({ item: respone.data, img: `${window.location.protocol}//${window.location.host}/${respone.data.anh}`}) }).catch(console.log)
+        axios.get(`${BASE_URL}/foods/${this.props.match.params.id}`).then((respone) => { this.setState({ item: respone.data, img: `${IMAGE_URL}/${respone.data.anh}`}) }).catch(console.log)
         axios.get(`${BASE_URL}/comments?mamon=${this.props.match.params.id}`).then((respone) => { this.setState({ comments: respone.data }); console.log(respone) }).catch(console.log)
     }
 

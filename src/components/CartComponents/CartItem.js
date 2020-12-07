@@ -27,7 +27,7 @@ class CartItem extends React.Component {
         return (
             <tr>
                 <td className="shoping__cart__item">
-                    <img src={this.props.img} alt="" />
+                    <img style={{width:'148px', height:'148px'}} src={this.props.img} alt="" />
                     <h5>{this.props.name}</h5>
                 </td>
                 <td className="shoping__cart__price">

@@ -30,13 +30,13 @@
 }
 
 .rec rec-dot rec rec-dot_active {
-    background-color: #7fad39;
-    box-shadow: 0 0 1px 3px #7fad39;
+    background-color: #e9351d;
+    box-shadow: 0 0 1px 3px #e9351d;
 }
 
 
 .slick-prev:before, .slick-next:before {
-    color: #7fad39;
+    color: #e9351d;
 }
 
 .detail-slider{

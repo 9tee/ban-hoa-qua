@@ -6,13 +6,13 @@ class PanelPoster extends React.Component{
         return(
             <div className="hero__item" style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/img/hero/banner.jpg'})`}}>
                 <div className="hero__text">
-                    <span>FRUIT FRESH</span>
+                    <span>Đồ ăn nhanh</span>
                     <h2>
-                    Vegetable<br/>
-                    100% Organic
+                    Đồ ăn<br/>
+                    100% sạch
                     </h2>
-                    <p>Free Pickup and Delivery Available</p>
-                    <Link href="#" className="primary-btn">SHOP NOW</Link>
+                    <p>Giao hàng khắp cả nước</p>
+                    <Link to="/shop" className="primary-btn">MUA NGAY</Link>
                 </div>
             </div>
         );

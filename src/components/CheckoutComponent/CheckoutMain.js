@@ -1,148 +1,118 @@
 import React from 'react';
+import { Form, Button, Input } from 'antd';
+import { connect } from 'react-redux'
+import axios from 'axios';
 
-class CheckoutMain extends React.Component{
-    constructor(props){
+import {BASE_URL} from '../../consts';
+
+class CheckoutMain extends React.Component {
+    constructor(props) {
         super(props);
-        this.handleSummit = this.handleSummit.bind(this);
-    }
-    handleSummit(e){
-        console.log(e);
     }
 
-    render(){
-        return(
+    onFinish = (values) => {
+        let data = { ...values, doan: this.props.cart }
+        axios.post(`${BASE_URL}/orders`,data).then(console.log).catch(console.log);
+    }
+
+    render() {
+        return (
             <section className="checkout spad">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <h6><span className="icon_tag_alt"></span> Have a coupon? <a href="#">Click here</a> to enter your code
-                        </h6>
-                    </div>
-                </div>
-                <div className="checkout__form">
-                    <h4>Billing Details</h4>
-                    <form action="#">
+                <div className="container">
+                    <div className="checkout__form">
+                        <h4>Billing Details</h4>
+
                         <div className="row">
                             <div className="col-lg-8 col-md-6">
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="checkout__input">
-                                            <p>Fist Name<span>*</span></p>
-                                            <input type="text" ref={(c) => this.title = c} name="title"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="checkout__input">
-                                            <p>Last Name<span>*</span></p>
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Country<span>*</span></p>
-                                    <input type="text"/>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Address<span>*</span></p>
-                                    <input type="text" placeholder="Street Address" className="checkout__input__add"/>
-                                    <input type="text" placeholder="Apartment, suite, unite ect (optinal)"/>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Town/City<span>*</span></p>
-                                    <input type="text"/>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Country/State<span>*</span></p>
-                                    <input type="text"/>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Postcode / ZIP<span>*</span></p>
-                                    <input type="text"/>
-                                </div>
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <div className="checkout__input">
-                                            <p>Phone<span>*</span></p>
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <div className="checkout__input">
-                                            <p>Email<span>*</span></p>
-                                            <input type="text"/>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="checkout__input__checkbox">
-                                    <label htmlFor="acc">
-                                        Create an account?
-                                        <input type="checkbox" id="acc"/>
-                                        <span className="checkmark"></span>
-                                    </label>
-                                </div>
-                                <p>Create an account by entering the information below. If you are a returning customer
-                                    please login at the top of the page</p>
-                                <div className="checkout__input">
-                                    <p>Account Password<span>*</span></p>
-                                    <input type="text"/>
-                                </div>
-                                <div className="checkout__input__checkbox">
-                                    <label htmlFor="diff-acc">
-                                        Ship to a different address?
-                                        <input type="checkbox" id="diff-acc"/>
-                                        <span className="checkmark"></span>
-                                    </label>
-                                </div>
-                                <div className="checkout__input">
-                                    <p>Order notes<span>*</span></p>
-                                    <input type="text"
-                                        placeholder="Notes about your order, e.g. special notes for delivery."/>
-                                </div>
+                                <Form
+                                    onFinish={this.onFinish}
+                                    initialValues = {{ghichu: ""}}
+                                >
+                                    <p>Tên <span>*</span></p>
+                                    <Form.Item name="tenkhach"
+                                     rules={[
+                                        {
+                                          required: true,
+                                          message: 'Không bỏ trống tên khách hàng',
+                                        },
+                                      ]}
+                                    className="checkout__input">
+                                        <Input />
+                                    </Form.Item>
+                                    <p>Địa chỉ <span>*</span></p>
+                                    <Form.Item name="diachinhan" 
+                                    rules={[
+                                        {
+                                          required: true,
+                                          message: 'Không bỏ trống địa chỉ',
+                                        },
+                                      ]}
+                                    className="checkout__input">
+                                        <Input className="checkout__input__add" />
+                                    </Form.Item>
+                                    <p>Số điện thoại<span>*</span></p>
+                                    <Form.Item name="sdt"
+                                    rules={[
+                                        {
+                                          required: true,
+                                          message: 'Không bỏ trống số điện thoại',
+                                        },
+                                      ]}
+                                    className="checkout__input">
+                                        <Input />
+                                    </Form.Item>
+                                    <p>Thông tin bổ sung <span>*</span></p>
+                                    <Form.Item name="ghichu" className="checkout__input">
+                                        <Input placeholder="Ngày giờ giao hàng,địa điểm phụ,..." />
+                                    </Form.Item>
+                                    <Form.Item>
+                                        <Button style={{ height: '53px' }} htmlType="submit" className="site-btn">ĐẶT HÀNG</Button>
+                                    </Form.Item>
+                                </Form>
                             </div>
                             <div className="col-lg-4 col-md-6">
                                 <div className="checkout__order">
-                                    <h4>Your Order</h4>
-                                    <div className="checkout__order__products">Products <span>Total</span></div>
+                                    <h4>Đơn hàng của bạn</h4>
+                                    <div className="checkout__order__products">Sản phẩm <span>Tổng</span></div>
                                     <ul>
-                                        <li>Vegetable’s Package <span>$75.99</span></li>
-                                        <li>Fresh Vegetable <span>$151.99</span></li>
-                                        <li>Organic Bananas <span>$53.99</span></li>
+                                        {this.props.cart.map((item) => {
+                                            return <li>{item.tenmon}<span>{item.dongia * item.soluong}đ</span></li>
+                                        })}
                                     </ul>
-                                    <div className="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                    <div className="checkout__order__total">Total <span>$750.99</span></div>
-                                    <div className="checkout__input__checkbox">
-                                        <label htmlFor="acc-or">
-                                            Create an account?
-                                            <input type="checkbox" id="acc-or"/>
-                                            <span className="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                        ut labore et dolore magna aliqua.</p>
+                                    <div className="checkout__order__subtotal">Tổng<span>{this.props.cart.reduce((total, value) => { return total + value.dongia * value.soluong }, 0)}đ</span></div>
+                                    <div className="checkout__order__total">Thành tiền <span>{this.props.cart.reduce((total, value) => { return total + value.dongia * value.soluong }, 0)}đ</span></div>
+                                    <p>Đơn hàng của quý khách sẽ được giao trong vòng 24h, vui lòng không tắt điện thoại để nhân viên có thể liên lạc được với quý khách</p>
                                     <div className="checkout__input__checkbox">
                                         <label htmlFor="payment">
                                             Check Payment
-                                            <input type="checkbox" id="payment"/>
+                                            <input type="checkbox" id="payment" />
                                             <span className="checkmark"></span>
                                         </label>
                                     </div>
                                     <div className="checkout__input__checkbox">
                                         <label htmlFor="paypal">
                                             Paypal
-                                            <input type="checkbox" id="paypal"/>
+                                            <input type="checkbox" id="paypal" />
                                             <span className="checkmark"></span>
                                         </label>
                                     </div>
-                                    <button type="submit" className="site-btn" onClick={this.handleSummit()}>PLACE ORDER</button>
+
                                 </div>
                             </div>
                         </div>
-                    </form>
+
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
         );
     }
 }
 
-export default CheckoutMain;
+const mapStateToProps = (state) => {
+    return {
+        cart: state.cart.cart,
+    }
+}
+
+
+export default connect(mapStateToProps)(CheckoutMain);

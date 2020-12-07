@@ -13,7 +13,7 @@ class Footer extends React.Component {
                         <div className="col-lg-3 col-md-6 col-sm-6">
                             <div className="footer__about">
                                 <div className="footer__about__logo">
-                                    <Link to="./index.html"><img src="img/logo.png" alt=""></img></Link>
+                                    <Link to="/"><img src="/assets/logo.png" alt=""></img></Link>
                                 </div>
                                 <ul>
                                     <li>Địa chỉ: 138 Trần Bình</li>

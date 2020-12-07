@@ -1,7 +1,7 @@
 import React from 'react';
 import ShopSideBar from "./ShopSideBar"
 import axios from 'axios'
-import {BASE_URL} from '../../consts';
+import { BASE_URL } from '../../consts';
 
 
 
@@ -10,29 +10,34 @@ import ShopProductItem from "./ShopProductItem";
 
 
 
-import {withRouter} from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 class ShopProduct extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {data: []};
+        this.state = { data: [] };
     }
-    componentDidMount(){
-        if (!this.props.match.params.id){
-        axios.get(`${BASE_URL}/foods`).then((respone) => this.setData(respone)).catch(console.log)
+    componentDidMount() {
+        if (!this.props.match.params.id) {
+            if (!this.props.match.params.name) {
+                axios.get(`${BASE_URL}/foods`).then((respone) => this.setData(respone)).catch(console.log)
+            }
+            else {
+                axios.get(`${BASE_URL}/foods/search?name=${this.props.match.params.name}`).then((respone) => this.setData(respone)).catch(console.log)
+            }
         }
-        else{
+        else {
             axios.get(`${BASE_URL}/foods?idtype=${this.props.match.params.id}`).then((respone) => this.setData(respone)).catch(console.log)
         }
     }
 
-    setData(respone){
-        switch(respone.status){
-            case 200:{
-                this.setState({data:respone.data},console.log());
+    setData(respone) {
+        switch (respone.status) {
+            case 200: {
+                this.setState({ data: respone.data }, console.log());
                 break;
             }
-            default:{
+            default: {
                 break;
             }
         }
@@ -52,7 +57,7 @@ class ShopProduct extends React.Component {
                             </div>
                             <ShopItemFilter total={this.state.data.length}></ShopItemFilter>
                             <div className="row">
-                                {this.state.data.map((item, index)=>{
+                                {this.state.data.map((item, index) => {
                                     return (<ShopProductItem item={item} key={index}></ShopProductItem>);
                                 })}
                             </div>

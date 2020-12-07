@@ -40,6 +40,7 @@ ReactDOM.render(
       <Header></Header>
       <Route path="/" exact component={Home} />
       <Route exact path="/shop" component={Shop} />
+      <Route exact path="/search/:name" component={Shop} />
       <Route path="/shop/:id" component={Shop} />
       <Route path="/login" component={Login} />
       <Route path="/shop-detail/:id" component={ShopDetail} />
