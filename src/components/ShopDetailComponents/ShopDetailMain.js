@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Form, Button, Input } from 'antd';
 
 import { withRouter } from "react-router-dom";
+import {connect} from 'react-redux';
 import axios from 'axios'
 import { BASE_URL, IMAGE_URL } from '../../consts';
 
@@ -39,14 +40,25 @@ class ShopDetailMain extends React.Component {
     }
 
     onFinish = values => {
-        console.log('Success:', values);
-        this.formRef.current.resetFields()
-    };
+        values.mamon = this.props.match.params.id
+        if(this.props.logged){
+            let header = { headers : { 'Authorization': window.localStorage.getItem('token')}}
+            console.log(header);
+            axios.post(`${BASE_URL}/comments`,values,header).then(
+                () => {
+                    axios.get(`${BASE_URL}/comments?mamon=${this.props.match.params.id}`)
+                    .then((respone) => { this.setState({ comments: respone.data }); console.log(respone) })
+                    .catch(console.log)
+                    this.formRef.current.resetFields()
+                }
+            ).catch(
+                () => {alert("Bình luận thất bại");}
+            );
+            }else{
+                this.props.history.push('/login');
+            }
 
-    onFinishFailed = errorInfo => {
-        console.log('Failed:', errorInfo);
     };
-
 
     add() {
         this.setState({ qty: this.state.qty + 1 })
@@ -114,7 +126,7 @@ class ShopDetailMain extends React.Component {
                                         ref={this.formRef}
                                     >
                                         <Form.Item
-                                            name="comment"
+                                            name="noidung"
                                         >
                                             <TextArea
                                                 placeholder="Nhận xét tại đây"
@@ -136,7 +148,7 @@ class ShopDetailMain extends React.Component {
                                                             <div class="row" style={{margin:'10px auto 0px auto', borderBottom: '1px solid #dee2e6', width:'100%' }}>
                                                                 <div className="media">
                                                                     <div className="media-left">
-                                                                        <img src="http://fakeimg.pl/50x50" class="media-object" style={{ width: '40px' }} />
+                                                                        <img src="/user.png" class="media-object" style={{ width: '40px' }} />
                                                                     </div>
                                                                     <div className="media-body" style={{ marginLeft: '20px' }}>
                                                                         <h4 className="media-heading title">{item.ten}</h4>
@@ -163,4 +175,10 @@ class ShopDetailMain extends React.Component {
     }
 }
 
-export default withRouter(ShopDetailMain)
+const mapStateToProps = (state) => {
+    return {
+        logged: state.login.login,
+    }
+}
+
+export default connect(mapStateToProps)(withRouter(ShopDetailMain))
